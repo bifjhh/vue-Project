@@ -18,7 +18,7 @@
                         <li v-text="v.content" class="mui-table-view-cell"></li>
                     </ul>
              </div>
-            <div class="page"><a @click="upPage()" href="javascript:;">上一页</a><a @click="nextPage()" href="javascript:;">下一页</a></div>
+            <div class="page"><a @click="nextPage()" href="javascript:;">加载更多</a></div>
         </div>
     </div>
 </template>
@@ -38,14 +38,11 @@ export default {
   },
   props: ["id"],
   methods: {
-    //   加载评论内容
-    getList() {
+    // 加载更多内容版
+    getList(page) {
+      page = page || 1;
       var url =
-        common.apidomain +
-        "/api/getcomments/" +
-        this.id +
-        "?pageindex=" +
-        this.pageindex;
+        common.apidomain + "/api/getcomments/" + this.id + "?pageindex=" + page;
       this.$http.get(url).then(function(res) {
         var data = res.body;
         if (data.status != 0) {
@@ -57,7 +54,7 @@ export default {
           });
           return;
         }
-        if (res.body.message.length<=0) {
+        if (res.body.message.length <= 0) {
           //   判断数据是否正常，否的话则阻断之后的函数运行
           Toast({
             message: "没有更多内容了",
@@ -66,8 +63,8 @@ export default {
           });
           return;
         }
-        //   数据正常则 给list 赋值
-        this.list = data.message;
+        //   数据正常则 让list数据和获取到的内容合并为一个数组
+        this.list = this.list.concat(data.message);
       });
     },
     // 发表评论方法
@@ -92,27 +89,22 @@ export default {
             position: "bottom",
             duration: 2000
           });
+          //   在用户发表评论之后将当前评论内容手动添加到列表顶部
+          this.list = [
+            {
+              'user_name': "匿名用户",
+              'add_time': new Date(),
+              'content': this.text
+            }
+          ].concat(this.list);
           //   发表成功后清空文本框内容
           this.text = "";
-          //   在用户发表评论之后重新加载当前评论列表
-          this.getList();
         });
     },
-    upPage() {
-      if (this.pageindex <= 1) {
-        Toast({
-          message: "已经是第一页了",
-          position: "bottom",
-          duration: 2000
-        });
-        return;
-      }
-      this.pageindex = this.pageindex - 1;
-      this.getList();
-    },
+
     nextPage() {
       this.pageindex = this.pageindex + 1;
-      this.getList();
+      this.getList(this.pageindex);
     }
   }
 };
@@ -156,13 +148,12 @@ textarea {
   background-color: rgba(22, 22, 22, 0.2);
   border-radius: 10px;
 }
-.page a {
+.page > a {
   display: inline-block;
-  width: 30%;
+  width: 100%;
   height: 100%;
   text-align: center;
   line-height: 40px;
-  margin-left: 10%;
 }
 .bd {
   padding-bottom: 5px;
