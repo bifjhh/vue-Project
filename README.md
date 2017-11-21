@@ -131,6 +131,6 @@ export default{
 - 在使用API接口的组件中导入common.js文件
         import common from '../kits/common.js';
 - 使用导入的域名
-  ```javascript
+```javascript
 var url= common.apidomain+'api/getlunbo'
 ```   
