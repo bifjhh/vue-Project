@@ -15,6 +15,7 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
+import common from "../../kits/common.js";
 export default {
   data() {
     return {
@@ -29,7 +30,7 @@ export default {
   methods: {
     getdetails() {
       console.log(this.id);
-      var url = "http://vue.studyit.io/api/getnew/" + this.id;
+      var url = common.apidomain + "/api/getnew/" + this.id;
       this.$http.get(url).then(function(res) {
         var data = res.body;
         if (data.status != 0) {
@@ -51,28 +52,27 @@ export default {
 
 <style lang="css" scoped>
 .temp img {
-    width: 100%;
-  }
-.temp{
-  padding:0 5px;
+  width: 100%;
 }
-.title{
+.temp {
+  padding: 0 5px;
+}
+.title {
   margin-top: 50px;
 }
 
-h4{
-  color:#26a2ff;
+h4 {
+  color: #26a2ff;
 }
-.title>P{  
+.title > p {
   text-align: right;
-  color: rgba(0, 0, 0, .5);
+  color: rgba(0, 0, 0, 0.5);
   padding-right: 5px;
   margin-top: 1em;
 }
-.title>P span{
+.title > p span {
   display: inline-block;
-  margin:0 5px 0 15px;
+  margin: 0 5px 0 15px;
   color: #f00;
 }
-
 </style>

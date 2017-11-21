@@ -43,6 +43,7 @@
 <script>
 // 引入mint-ui的消息提示框
 import { Toast } from "mint-ui";
+import common from "../kits/common.js";
 
 export default {
   data() {
@@ -55,7 +56,7 @@ export default {
   },
   methods: {
     getImg() {
-      var url = "http://vue.studyit.io/api/getlunbo";
+      var url = common.apidomain+"/api/getlunbo";
       this.$http.get(url).then(function(res) {
         var data = res.body;
         if (data.status != 0) {

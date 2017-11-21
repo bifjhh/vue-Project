@@ -117,4 +117,20 @@ Vue.filter('datefmt',function(input,fmtstring){
 - 在点击时获取路由参数的值（传入点击时的id）
 - 根据传入的id进行ajax请求
 - 使用created方法调用请求
-- 将返回的数据接收并渲染到页面               
+- 将返回的数据接收并渲染到页面 
+
+#### 域名提取
+- 在开发项目阶段，域名可能会分为测试域名，线上域名等多个域名，需要经常切换，所以讲域名进行提取       
+- 在src目录下新建kits目录，创建common.js文件
+```javascript
+// 职责：负责管理当前系统中的所有公共的配置
+export default{
+    apidomain: 'http://vue.studyit.io' // 所有数据api的域名地址
+}
+```   
+- 在使用API接口的组件中导入common.js文件
+        import common from '../kits/common.js';
+- 使用导入的域名
+  ```javascript
+var url= common.apidomain+'api/getlunbo'
+```   
