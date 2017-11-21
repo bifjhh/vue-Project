@@ -67,7 +67,6 @@ export default {
         }
         //   数据正常则 给list 赋值
         this.details = data.message;
-        console.log(this.details);
       });
     }
   }

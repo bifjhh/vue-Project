@@ -38,7 +38,7 @@ export default {
   data() {
     //es6写法 等价于data: function() {}
     return {
-      name: "人生不过一场场的遇见."
+ 
     };
   }
 };

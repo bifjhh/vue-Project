@@ -11,12 +11,19 @@
             <p>{{info.add_time | datefmt('YYYY-MM-DD')}} <span>{{info.click}}</span>次浏览</p>
         </div>
         <div id="content" v-html="info.content"></div>
+        <!-- 评论组件的集成 -->
+        <comment :id="id"></comment>
     </div>
 </template>
 <script>
 import { Toast } from "mint-ui";
 import common from "../../kits/common.js";
+// 评论组件
+import comment from '../subcom/comment.vue';
 export default {
+  components:{
+    comment
+  },
   data() {
     return {
       info: {},
@@ -29,7 +36,6 @@ export default {
   },
   methods: {
     getdetails() {
-      console.log(this.id);
       var url = common.apidomain + "/api/getnew/" + this.id;
       this.$http.get(url).then(function(res) {
         var data = res.body;

@@ -71,7 +71,6 @@ export default {
   }
 };
 </script>
-
 <style lang="css" scoped>
 .mint-swipe {
   height: 300px;
@@ -82,7 +81,7 @@ export default {
 .mint-swipe-item a img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: 100%; 
 }
 /* 修改九宫格的背景色 */
 .mui-table-view.mui-grid-view {
