@@ -6,7 +6,7 @@
         <mt-button @click="publish()" type="primary" size="large">发表评论</mt-button>
         <div class="bd">
             <div class="title">
-                <span>评论列表</span><span>{{list.length}}</span>条评论
+                <span>评论列表</span><span class="f-r">{{list.length}}条评论</span>
             </div>
             <div class="content"   v-for="(v, i) in list">
                 <div class="head">
@@ -57,6 +57,15 @@ export default {
           });
           return;
         }
+        if (res.body.message.length<=0) {
+          //   判断数据是否正常，否的话则阻断之后的函数运行
+          Toast({
+            message: "没有更多内容了",
+            position: "bottom",
+            duration: 2000
+          });
+          return;
+        }
         //   数据正常则 给list 赋值
         this.list = data.message;
       });
@@ -83,6 +92,8 @@ export default {
             position: "bottom",
             duration: 2000
           });
+          //   发表成功后清空文本框内容
+          this.text = "";
           //   在用户发表评论之后重新加载当前评论列表
           this.getList();
         });
@@ -120,8 +131,18 @@ textarea {
 .mui-table-view:after {
   position: inherit;
 }
-.title{
-    margin-top: 10px
+.title {
+  margin-top: 10px;
+  color: #000;
+  font-weight: 600;
+  font-size: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+.f-r {
+  float: right;
+  font-weight: 400;
+  font-size: 15px;
 }
 .content {
   border-bottom: 1px solid #ccc;
