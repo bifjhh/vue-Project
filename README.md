@@ -225,6 +225,12 @@ export default {
 - 因为插件需要w h 属性，如果没有，则自己手动添加这两个属性
 - 然后将设置好的属性，赋值渲染，完成缩略图预览
 
+### 添加商品列表组件
+- 使用MUI图文表格布局商品列表
+- 修改原有样式
+- 使用ajax请求商品列表数据
+- 将获得的数据渲染到页面上，完成商品列表展示
+
 ## 箭头函数
 - 箭头函数有以下几个方面的特点：
     + this, super, arguments和arguments的值由最近一个包含它的非箭头函数定义。(No this, superm arguments and new.target bindings);
@@ -236,6 +242,7 @@ export default {
 
 - 箭头函数语法
 ```javascript
+// 简单的看法，知道怎么回事就行
     let sum = (n1, n2) => n1 + n2;
     // 相当于
     let sum = function(n1, n2) {
@@ -251,51 +258,7 @@ export default {
         };
     };
 ```
-- 没有this绑定
-```javascript
-    let PageHandler = {
-        id: "123456",
-        init: function() {
-            document.addEventListener("click", function(event) {
-                this.doSomething(event.type); // error
-            }, false);
-        },
-        doSomething: function(type) {
-            console.log("Handling " + type + " for " + this.id);
-        }
-    };
-    // init函数中的this.doSomething，this指向的是函数内部document对象，
-    // 而不是PageHandler对象
 
-// 使用箭头函数改写：
-    let PageHandler = {
-    id: "123456",
-    init: function() {
-        document.addEventListener("click", event => this.doSomething(evnet.type)
-            }, false);
-        },
-    doSomething: function(type) {
-        console.log("Handling " + type + " for " + this.id);
-    }
-    };
-    // 此处箭头函数this指向包含它的函数，即init,init为PageHandler的方法，
-    // this指向PageHandler对象实例
-```
-- 不能使用new
-```javascript
-var MyType = () => {};
-var obj = new MyType(); // Error
-```
-- 没有arguments对象
-    + 箭头函数没有arguments对象，但是可以使用包含函数中的arguments对象
-```javascript
-    function createArrowFunctionReturningFirstArg() {
-        // arguments 为 createArrowFunctionReturningFirstArg中的对象
-        return  () => arguments[0]; 
-    }
-    var arrowFunction = createArrowFunctionReturningFirstArg(10);
-    arrFunction(); // 10
-```
 
 
 ### 域名提取
