@@ -16,8 +16,8 @@ var router = new VueRouter({
     linkActiveClass: 'mui-active',
     routes: [
         {
-            path: '',
-            component: home,
+            path: '/',
+            redirect: '/home'
         },
         {
             path: '/home',
