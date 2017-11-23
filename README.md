@@ -225,14 +225,23 @@ export default {
 - 因为插件需要w h 属性，如果没有，则自己手动添加这两个属性
 - 然后将设置好的属性，赋值渲染，完成缩略图预览
 
-## 箭头函数语法
+## 箭头函数
+- 箭头函数有以下几个方面的特点：
+    + this, super, arguments和arguments的值由最近一个包含它的非箭头函数定义。(No this, superm arguments and new.target bindings);
+    + 箭头函数内部没有 [[construct]]方法， 因此不能当作构造器，使用new操作符；
+    + 不存在原型(No prototype);
+    + 不能改变this, 在整个箭头函数生命周期this值保持不变;
+    + 不存在arguments对象，不过包含它的函数存在，箭头函数依靠命名参数和rest parameters；
+    + 不能拥有重复的命名参数，ES5只有严格模式下才不允许
+
+- 箭头函数语法
 ```javascript
     let sum = (n1, n2) => n1 + n2;
     // 相当于
     let sum = function(n1, n2) {
         return n1 + n2;
     };
-    
+
     let getTempItem = id => ({ id: id, name: "Temp" });
     // 相当于
     let getTempItem = function(id) {
@@ -242,8 +251,52 @@ export default {
         };
     };
 ```
+- 没有this绑定
+```javascript
+    let PageHandler = {
+        id: "123456",
+        init: function() {
+            document.addEventListener("click", function(event) {
+                this.doSomething(event.type); // error
+            }, false);
+        },
+        doSomething: function(type) {
+            console.log("Handling " + type + " for " + this.id);
+        }
+    };
+    // init函数中的this.doSomething，this指向的是函数内部document对象，
+    // 而不是PageHandler对象
 
-    
+// 使用箭头函数改写：
+    let PageHandler = {
+    id: "123456",
+    init: function() {
+        document.addEventListener("click", event => this.doSomething(evnet.type)
+            }, false);
+        },
+    doSomething: function(type) {
+        console.log("Handling " + type + " for " + this.id);
+    }
+    };
+    // 此处箭头函数this指向包含它的函数，即init,init为PageHandler的方法，
+    // this指向PageHandler对象实例
+```
+- 不能使用new
+```javascript
+var MyType = () => {};
+var obj = new MyType(); // Error
+```
+- 没有arguments对象
+    + 箭头函数没有arguments对象，但是可以使用包含函数中的arguments对象
+```javascript
+    function createArrowFunctionReturningFirstArg() {
+        // arguments 为 createArrowFunctionReturningFirstArg中的对象
+        return  () => arguments[0]; 
+    }
+    var arrowFunction = createArrowFunctionReturningFirstArg(10);
+    arrFunction(); // 10
+```
+
 
 ### 域名提取
 - 在开发项目阶段，域名可能会分为测试域名，线上域名等多个域名，需要经常切换，所以讲域名进行提取       
