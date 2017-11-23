@@ -101,7 +101,7 @@ Vue.filter('datefmt',function(input,fmtstring){
         {{v.add_time | datefmt('YYYY-MM-DD HH:mm:ss')}}
 
 
-#### 添加图文详情组件
+#### 添加新闻详情组件
 - 设置新闻列表 
 
     ```html
@@ -158,6 +158,14 @@ this.list = this.list.concat(data.message);
     }
     ].concat(this.list);
 ```
+## 添加图文分享组件
+- 在component下创建photo文件夹
+- 创建photolist.vue组件
+- 在main.js中配置组件引入和路由规则
+
+
+
+
 ### 域名提取
 - 在开发项目阶段，域名可能会分为测试域名，线上域名等多个域名，需要经常切换，所以讲域名进行提取       
 - 在src目录下新建kits目录，创建common.js文件
