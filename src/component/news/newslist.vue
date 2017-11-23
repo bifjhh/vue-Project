@@ -4,7 +4,6 @@
             <router-link to="/home" slot="left">
                 <mt-button icon="back">返回</mt-button>
             </router-link>
-            <mt-button icon="more" slot="right"></mt-button>
         </mt-header>
        <ul class="mui-table-view">
             <li class="mui-table-view-cell mui-media" v-for="v in list">
