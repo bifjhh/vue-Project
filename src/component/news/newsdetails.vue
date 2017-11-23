@@ -4,7 +4,6 @@
             <router-link to="/news/newslist" slot="left">
                 <mt-button icon="back">返回</mt-button>
             </router-link>
-            <mt-button icon="more" slot="right"></mt-button>
         </mt-header>
         <div class="title">
             <h4 v-text="info.title"></h4>
