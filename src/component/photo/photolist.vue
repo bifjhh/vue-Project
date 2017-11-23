@@ -28,6 +28,7 @@
   </div>
 </template>
 <script>
+import { Toast } from "mint-ui";
 import common from '../../kits/common.js';
 export default {
     data(){
@@ -78,7 +79,11 @@ export default {
                     return;
                 }else if (res.body.message[0]==undefined) {
                 //   判断数据是否正常，否的话则阻断之后的函数运行
-                    
+                    Toast({
+                        message: "未能获取到内容",
+                        position: "bottom",
+                        duration: 2000
+                    });
                     return;
                 };
             this.imgList=res.body.message;//给图片列表数组赋值
