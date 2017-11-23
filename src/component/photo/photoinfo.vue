@@ -12,13 +12,13 @@
         </div>
         <div class="mui-content">
             <ul class="mui-table-view mui-grid-view mui-grid-9">
-                <li v-for="(v, i) in imgs" :key="v.id" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                    <img class="preview-img"  :src="v.src" height="100">
+                <li v-for="(v, i) in list" :key="v.id" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+                    <img class="preview-img"  :src="v.src" height="100" @click="$preview.open(i, list)">
                 </li>
             </ul>
             <p v-html="info.content"></p>
         </div>
-        
+        <comment :id="id"></comment>
   </div>
 </template>
 <script>
@@ -26,12 +26,16 @@
 // 缩略图数组 /api/getthumimages/43
 import { Toast } from "mint-ui";
 import common from '../../kits/common.js';
+import comment from '../subcom/comment.vue';
 export default {
+    components:{
+       comment 
+    },
     data(){
         return{
             id:0,
-            info:{},
-            imgs:[],
+            info:{},//文字部分内容
+            list:[],//图片列表
         }
     },
     created(){
@@ -53,7 +57,31 @@ export default {
                     });
                     return;
                 }
-                this.imgs=res.body.message;
+                res.body.message.forEach((item)=>{
+                    var img = new Image();
+                    img.src=item.src;
+                    img.onload=function(){
+                        item.h=img.height;
+                        item.w=img.width;
+                    }
+                })
+                this.list=res.body.message;
+                /* 箭头函数语法
+                let sum = (n1, n2) => n1 + n2;
+                // 相当于
+                let sum = function(n1, n2) {
+                    return n1 + n2;
+                };
+                
+                let getTempItem = id => ({ id: id, name: "Temp" });
+                // 相当于
+                let getTempItem = function(id) {
+                    return {
+                        id: id,
+                        name: "Temp"
+                    };
+                };
+                */
             });
         },
         getInfo(id){

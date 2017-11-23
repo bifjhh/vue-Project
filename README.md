@@ -176,7 +176,74 @@ this.list = this.list.concat(data.message);
 - 将返回的数据渲染到页面
 
 ### 添加图片详情信息组件
+- 构造静态结构
+- 获取点击时当前图片id
+- 根据获取的id进行不同的ajax请求
+- 使用MUI九宫格样式渲染缩略图
+### 添加Vue preview 插件
+- 下载安装
+    + cnpm i vue-preview -S
+    + 插件目前仅支持vue2.0以上版本
+    + img标签上的class不能去掉
+- 如果你是使用vue-cli生成的项目，可能需要你修改webpack.base.conf.js文件中的loaders，添加一个loader。 
+    + 原因：插件编写中使用了es6的语法，需要进行代码编译
+```javascript
+{
+    test: /vue-preview.src.*?js$/,
+    loader: 'babel'//webpack2.0||3.0不需要引用
+}
+```
+- 在main.js中配置
+```javascript
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
+```
+- 代码实例（转自文档）
+```html
+<template>
+  <img class="preview-img" v-for="(item, index) in list" :src="item.src" height="100" @click="$preview.open(index, list)">
+</template>
 
+<script>
+export default {
+    data () {
+      return {
+        list: [{
+          src: 'https://placekitten.com/600/400',
+          w: 600,
+          h: 400//初始的大小
+        }, {
+          src: 'https://placekitten.com/1200/900',
+          w: 1200,
+          h: 900//点击预览的大小
+        }]
+      }
+    }
+  }
+</script>
+```
+- 因为插件需要w h 属性，如果没有，则自己手动添加这两个属性
+- 然后将设置好的属性，赋值渲染，完成缩略图预览
+
+## 箭头函数语法
+```javascript
+    let sum = (n1, n2) => n1 + n2;
+    // 相当于
+    let sum = function(n1, n2) {
+        return n1 + n2;
+    };
+    
+    let getTempItem = id => ({ id: id, name: "Temp" });
+    // 相当于
+    let getTempItem = function(id) {
+        return {
+            id: id,
+            name: "Temp"
+        };
+    };
+```
+
+    
 
 ### 域名提取
 - 在开发项目阶段，域名可能会分为测试域名，线上域名等多个域名，需要经常切换，所以讲域名进行提取       

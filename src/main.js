@@ -3,6 +3,8 @@ import App from "./APP.vue"; //导入App.vue的vue对象
 // 利用Vue对象进行解析渲染
 import VueRouter from 'vue-router'; //导入vue路由的依赖包
 Vue.use(VueRouter); //在vue中使用路由
+import VuePreview from 'vue-preview';//使用图片预览组件
+Vue.use(VuePreview)
 // 导入vue组件
 import home from './component/home.vue';//首页组件
 import vip from './component/shopcar/vip.vue';//会员组件
