@@ -1,7 +1,7 @@
 <template>
   <div class="temp">
         <mt-header fixed title="商品列表">
-            <router-link to="/home" slot="left">
+            <router-link to="goods/goodslist" slot="left">
                 <mt-button icon="back">返回</mt-button>
             </router-link>
         </mt-header>
