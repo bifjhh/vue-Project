@@ -27,7 +27,7 @@ var router = new VueRouter({
         {path: '/news/newslist',component: newslist,},//新闻列表路由
         {path: '/news/newsdetails/:id',component: newsdetails,},//新闻详情页组件
         {path: '/photo/photolist', component: photolist,},//图片分享路由
-        {path: '/photo/photoinfo', component: photoinfo,},//图片详情路由
+        {path: '/photo/photoinfo/:id', component: photoinfo,},//图片详情路由
     ]
 });
 

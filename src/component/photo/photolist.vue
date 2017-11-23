@@ -130,10 +130,13 @@ export default {
             .desc{
                 width: 100%;
                 background-color: rgba(0,0,0,0.2);
-                position: absolute;
+                position:relative;
                 bottom: 2px;
                 left: 0px;
-                padding: 0 10px;
+                padding: 10px;
+                margin-top: -3px;
+                margin-bottom: 4px;
+
                 h5{
                     color:#fff;
                 }
@@ -144,6 +147,12 @@ export default {
             }
         }
     }
+}
+
+image[lazy=loading] {
+    width: 40px;
+    height: 300px;
+    margin: auto;
 }
 </style>
 
