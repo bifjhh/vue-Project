@@ -241,6 +241,9 @@ export default {
 - 根据商品列表点击时传入的id，进行ajax请求
 - 返回数据后，将获得的数据渲染到页面当中
 
+
+
+
 ## 箭头函数
 - 箭头函数有以下几个方面的特点：
     + this, super, arguments和arguments的值由最近一个包含它的非箭头函数定义。(No this, superm arguments and new.target bindings);
@@ -249,7 +252,6 @@ export default {
     + 不能改变this, 在整个箭头函数生命周期this值保持不变;
     + 不存在arguments对象，不过包含它的函数存在，箭头函数依靠命名参数和rest parameters；
     + 不能拥有重复的命名参数，ES5只有严格模式下才不允许
-
 - 箭头函数语法
 ```javascript
 // 简单的看法，知道怎么回事就行
@@ -268,8 +270,6 @@ export default {
         };
     };
 ```
-
-
 
 ### 域名提取
 - 在开发项目阶段，域名可能会分为测试域名，线上域名等多个域名，需要经常切换，所以讲域名进行提取       
