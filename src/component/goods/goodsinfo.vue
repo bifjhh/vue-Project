@@ -1,6 +1,6 @@
 <template>
   <div class="temp">
-        <mt-header fixed title="详情信息">
+        <mt-header fixed :title="info.title">
             <router-link to="/goods/goodslist" slot="left">
                 <mt-button icon="back">返回</mt-button>
             </router-link>
@@ -35,7 +35,9 @@
             </ul>
         </div>
         <div class="other">
-            <mt-button type="primary" size="large">图文详情</mt-button>
+            <router-link v-bind="{to:'/goods/goodsdetails/' + id}">
+                <mt-button type="primary" size="large">图文详情</mt-button>
+            </router-link>
             <mt-button type="danger" size="large">商品评论</mt-button>
         </div>
   </div>
@@ -114,17 +116,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-/* .mint-swipe,
-.mint-swipe-items-wrap {
-  width: 100%;
-  height: 300px;
-  .mint-swipe-item {
-    width: 100%;
-    height: 100%;
-    background-color: #ccc;
-  }
-}
- */
+
 .price {
   s {
     margin-right: 20px;

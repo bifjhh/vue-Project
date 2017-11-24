@@ -15,7 +15,8 @@ import newsdetails from './component/news/newsdetails.vue';//新闻详情页组�
 import photolist from './component/photo/photolist.vue';//图片分享组件
 import photoinfo from './component/photo/photoinfo.vue';//图片详情组件
 import goodslist from './component/goods/goodslist.vue';//商品列表组件
-import goodsinfo from './component/goods/goodsinfo.vue';//商品详情组件
+import goodsinfo from './component/goods/goodsinfo.vue';//商品展示组件
+import goodsdetails from './component/goods/goodsdetails.vue'; //商品详情组件
 
 
 // 定义路由规则
@@ -33,7 +34,8 @@ var router = new VueRouter({
         {path: '/photo/photolist', component: photolist,},//图片分享路由
         {path: '/photo/photoinfo/:id', component: photoinfo,},//图片详情路由
         {path: '/goods/goodslist', component: goodslist, },//商品列表路由
-        {path: '/goods/goodsinfo/:id', component: goodsinfo, },//商品详情路由
+        {path: '/goods/goodsinfo/:id', component: goodsinfo, },//商品展示路由
+        {path: '/goods/goodsdetails/:id', component: goodsdetails, },//商品详情路由
     ]
 });
 

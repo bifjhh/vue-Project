@@ -26,6 +26,9 @@ export default {
   height: 300px;
   width: 100%;
 }
+.mint-swipe-item a{
+    overflow: hidden;
+}
 .mint-swipe-item,
 .mint-swipe-item a,
 .mint-swipe-item a img {
