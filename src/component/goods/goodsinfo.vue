@@ -38,7 +38,9 @@
             <router-link v-bind="{to:'/goods/goodsdetails/' + id}">
                 <mt-button type="primary" size="large">图文详情</mt-button>
             </router-link>
-            <mt-button type="danger" size="large">商品评论</mt-button>
+            <router-link v-bind="{to:'/goods/goodscomment/' + id}">
+                <mt-button type="danger" size="large">商品评论</mt-button>
+            </router-link>
         </div>
   </div>
 </template>
@@ -46,6 +48,7 @@
 import { Toast } from "mint-ui";
 import common from "../../kits/common.js";
 import swipe from "../subcom/swipe.vue";
+
 export default {
   components: {
     swipe
@@ -116,7 +119,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-
 .price {
   s {
     margin-right: 20px;
