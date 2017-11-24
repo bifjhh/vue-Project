@@ -18,7 +18,7 @@
 			<span class="mui-tab-label">会员</span>
 		</router-link>
 		<router-link class="mui-tab-item" to="/goodscar">
-			<span class="mui-icon mui-icon-contact"><span class="mui-badge">0</span></span>
+			<span class="mui-icon mui-icon-contact"><span id="badge" class="mui-badge">0</span></span>
 			<span class="mui-tab-label">购物车</span>
 		</router-link>
 		<router-link class="mui-tab-item" to="/search">
@@ -31,16 +31,19 @@
 </template>
 
 <script>
+import { bus } from "./kits/vm.js";
 // 本质上是一个vue组件
+bus.$on('countstr', function(count) {
+  var badegobj = document.querySelector("#badge");
+  badegobj.innerText = parseInt(badegobj.innerText) + count;
+})
 export default {
   //es6导出对象的写法
   // data: function() {
   data() {
     //es6写法 等价于data: function() {}
-    return {
- 
-    };
-  }
+    return {}
+  },
 };
 </script>
 <style scoped>

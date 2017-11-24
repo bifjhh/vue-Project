@@ -261,6 +261,53 @@ export default {
 - 将构造好的组件导入到父组件内
 - 在父组件内构造子组件自定义事件调用时执行的方法，获取子组件传递的值
 
+## 点击加入购物车
+- 实现点击时的物品数同步到购物车选项卡上
+- 因为组件之间并不是父子组件关系
+- 使用非父子组件的通信方法
+### 非父子组件的通信
+
+- 有时候，非父子关系的两个组件之间也需要通信。在简单的场景下，可以使用一个空的 Vue 实例作为事件总线：
+```javascript
+var bus = new Vue()
+// 触发组件 A 中的事件
+bus.$emit('id-selected', 1)
+
+// 在组件 B 创建的钩子中监听事件
+bus.$on('id-selected', function (id) {
+  // ...
+})
+```
+### 使用localStorage存储购物车数据
+#### 创建处理localStoraged的js文件
+- 设置常量key来作为localStoraged存取数据中的键
+- 设置一个obj对象 对象内用于存储商品的编号以及数量
+```javascript
+    var valueObj = {//导出一个obj对象 对象内用于存储商品的编号以及数量
+        "goodsid": 0,//商品编号id
+        "count": 0,//商品数量
+    };
+```
+- 设置向localStorage存储数据的方法
+    + setItem
+
+```javascript
+    //setItem 设置localStorage存储数据
+    function setItem(value) {//value 为调用方法是传入的数据       
+        var jsonString = localStorage.getItem(key);//设置变量接收本地已经存储的数据
+
+        jsonString = jsonString||'[]';//如果没有已存储的数据，则赋值为空数组
+
+        var arr = JSON.parse(jsonString);//设置arr接收获得的数据，转换为对象
+
+        arr.push(value);//将用户点击加入购物车的内容，追加到arr数组内部
+
+        localStorage.setItem(key,JSON.stringify(arr));//将最佳好的内容，转换成json字符串格式存储到localStorage
+    }
+```
+
+
+
 ## 将共同的轮播图提取为一个子组件
 - 创建组件，并在main.js中配置路由规则
 - 引入mint-ui 的 mt-swipe 轮播图样式
@@ -269,6 +316,7 @@ export default {
     + 父组件使用ajax请求获取轮播图数据
     + swipe接收父组件传递的images数据，进行图片渲染，
 - 完成适应不同API的图片渲染
+
 
 ## 箭头函数
 - 箭头函数有以下几个方面的特点：
@@ -297,7 +345,7 @@ export default {
     };
 ```
 
-### 域名提取
+## 域名提取
 - 在开发项目阶段，域名可能会分为测试域名，线上域名等多个域名，需要经常切换，所以讲域名进行提取       
 - 在src目录下新建kits目录，创建common.js文件
 ```javascript

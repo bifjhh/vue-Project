@@ -17,7 +17,7 @@
                 </li>
                 <li>
                     <mt-button type="danger">立即购买</mt-button>
-                    <mt-button type="primary">加入购物车</mt-button>
+                    <mt-button @click="toshopcar" type="primary">加入购物车</mt-button>
                 </li>
             </ul>
         </div>
@@ -45,6 +45,8 @@ import { Toast } from "mint-ui";
 import common from "../../kits/common.js";
 import swipe from "../subcom/swipe.vue";
 import inputNumber from '../subcom/inputNumber.vue'
+import {bus} from '../../kits/vm.js'
+import {setItem, valueObj} from '../../kits/localSt.js';
 
 export default {
   components: {
@@ -99,6 +101,12 @@ export default {
     },
     getcount(count){
       this.inputNumberCount=count;
+    },
+    toshopcar(){
+      bus.$emit('countstr',this.inputNumberCount);
+      valueObj.goodsid=this.id;
+      valueObj.count=this.inputNumberCount;
+      setItem(valueObj);
     }
   }
 };
