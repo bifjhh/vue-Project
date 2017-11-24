@@ -13,11 +13,7 @@
             <ul>
                 <li>市场价：<s>￥{{info.market_price}}</s>销售价：<span>￥{{info.sell_price}}</span></li>
                 <li>购买数量：
-                    <div class="number">
-                        <span @click="minus()">-</span>
-                        <span v-text="price"></span>
-                        <span @click="add()">+</span>
-                    </div>
+                    <inputNumber @dataobj="getcount"></inputNumber>
                 </li>
                 <li>
                     <mt-button type="danger">立即购买</mt-button>
@@ -48,17 +44,19 @@
 import { Toast } from "mint-ui";
 import common from "../../kits/common.js";
 import swipe from "../subcom/swipe.vue";
+import inputNumber from '../subcom/inputNumber.vue'
 
 export default {
   components: {
-    swipe
+    swipe,inputNumber
   },
   data() {
     return {
       id: 0,
       info: {},
       price: 1,
-      imgs: []
+      imgs: [],
+      inputNumberCount:0,
     };
   },
   created() {
@@ -99,21 +97,8 @@ export default {
         this.info = res.body.message[0];
       });
     },
-    // 数量-1
-    minus() {
-      if (this.price <= 1) {
-        Toast({
-          message: "再减就没有了",
-          position: "bottom",
-          duration: 2000
-        });
-        return;
-      }
-      this.price -= 1;
-    },
-    // 数量+1
-    add() {
-      this.price += 1;
+    getcount(count){
+      this.inputNumberCount=count;
     }
   }
 };
@@ -125,6 +110,9 @@ export default {
   }
   li:nth-of-type(2) {
     position: relative;
+  }
+  li:first-of-type span {
+    color: red;
   }
   .number {
     position: absolute;
