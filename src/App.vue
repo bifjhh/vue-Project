@@ -17,7 +17,7 @@
 			<span class="mui-icon mui-icon-email"></span>
 			<span class="mui-tab-label">会员</span>
 		</router-link>
-		<router-link class="mui-tab-item" to="/goods">
+		<router-link class="mui-tab-item" to="/goodscar">
 			<span class="mui-icon mui-icon-contact"><span class="mui-badge">0</span></span>
 			<span class="mui-tab-label">购物车</span>
 		</router-link>

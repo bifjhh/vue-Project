@@ -9,7 +9,7 @@ Vue.use(VuePreview)
 import home from './component/home.vue';//首页组件
 import vip from './component/shopcar/vip.vue';//会员组件
 import search from './component/shopcar/search.vue';//搜索组件
-import goods from './component/shopcar/goods.vue';//购物车组件
+import goodscar from './component/shopcar/goodscar.vue'; //购物车组件
 import newslist from './component/news/newslist.vue';//新闻列表组件
 import newsdetails from './component/news/newsdetails.vue';//新闻详情页组件
 import photolist from './component/photo/photolist.vue';//图片分享组件
@@ -29,7 +29,7 @@ var router = new VueRouter({
         {path: '/home',component: home,},//首页路由
         {path: '/vip',component: vip,},//会员路由
         {path: '/search',component: search,},//搜索路由
-        {path: '/goods',component: goods,},//购物车路由
+        {path: '/goodscar',component: goodscar,},//购物车路由
         {path: '/news/newslist',component: newslist,},//新闻列表路由
         {path: '/news/newsdetails/:id',component: newsdetails,},//新闻详情页组件
         {path: '/photo/photolist', component: photolist,},//图片分享路由
