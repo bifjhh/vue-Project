@@ -1,16 +1,8 @@
 <template lang="html">
     <div class="temp">
-        <!-- 轮播图 -->
-        <mt-swipe :auto="3000">
-            <!-- <mt-swipe-item>1</mt-swipe-item> -->
-            <mt-swipe-item v-for='v in list' :key="v.id">
-                <!-- 因为直接使用差值表达式无法解析,所以使用v-bind进行绑定 -->
-                <a :href="v.url"> <!-- 绑定a标签跳转链接 -->
-                    <img :src="v.img"><!-- 绑定图片属性 -->
-                </a>
-            </mt-swipe-item>
-           
-        </mt-swipe>
+       
+        <swipe :imgs="list"></swipe>  
+        
         <!-- 九宫格 -->
         <div class="mui-content">
           <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -44,8 +36,12 @@
 // 引入mint-ui的消息提示框
 import { Toast } from "mint-ui";
 import common from "../kits/common.js";
+import swipe from "../component/subcom/swipe.vue";
 
 export default {
+  components:{
+    swipe
+  },
   data() {
     return {
       list: []
@@ -72,17 +68,7 @@ export default {
 };
 </script>
 <style lang="css" scoped>
-.mint-swipe {
-  height: 300px;
-  width: 100%;
-}
-.mint-swipe-item,
-.mint-swipe-item a,
-.mint-swipe-item a img {
-  display: block;
-  width: 100%;
-  height: 100%; 
-}
+
 /* 修改九宫格的背景色 */
 .mui-table-view.mui-grid-view {
   background-color: #fff;

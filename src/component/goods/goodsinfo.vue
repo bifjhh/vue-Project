@@ -6,11 +6,7 @@
             </router-link>
         </mt-header>
         <!-- 轮播图 -->
-        <mt-swipe :auto="3000">
-            <mt-swipe-item>1</mt-swipe-item>
-            <mt-swipe-item>2</mt-swipe-item>
-            <mt-swipe-item>3</mt-swipe-item>
-        </mt-swipe>
+        <swipe :imgs="imgs"></swipe>  
         <div class="price">
             <h4>{{info.title}}</h4>
             <hr>
@@ -47,19 +43,41 @@
 <script>
 import { Toast } from "mint-ui";
 import common from "../../kits/common.js";
+import swipe from "../subcom/swipe.vue";
 export default {
+  components: {
+    swipe
+  },
   data() {
     return {
       id: 0,
       info: {},
-      price:1,
+      price: 1,
+      imgs: []
     };
   },
   created() {
     this.id = this.$route.params.id;
     this.getInfo();
+    this.getImgs();
   },
   methods: {
+    //  获取轮播图数据
+    getImgs() {
+      var url = common.apidomain + "/api/getthumimages/" + this.id;
+      this.$http.get(url).then(function(res) {
+        if (res.body.status != 0) {
+          //   判断数据是否正常，否的话则阻断之后的函数运行
+          Toast({
+            message: "获取内容出错",
+            position: "bottom",
+            duration: 2000
+          });
+          return;
+        }
+        this.imgs = res.body.message;
+      });
+    },
     //   获取数据
     getInfo() {
       var url = common.apidomain + "/api/goods/getinfo/" + this.id;
@@ -74,81 +92,76 @@ export default {
           return;
         }
         this.info = res.body.message[0];
-        console.log(this.info);
       });
     },
     // 数量-1
-    minus(){
-        if(this.price<=1){
-            Toast({
-                message: "再减就没有了",
-                position: "bottom",
-                duration: 2000
-            });
-            return;
-        }
-        this.price-=1;
+    minus() {
+      if (this.price <= 1) {
+        Toast({
+          message: "再减就没有了",
+          position: "bottom",
+          duration: 2000
+        });
+        return;
+      }
+      this.price -= 1;
     },
     // 数量+1
-    add(){
-        this.price+=1;
-    },
+    add() {
+      this.price += 1;
+    }
   }
 };
 </script>
 <style lang="less" scoped>
-
-.mint-swipe,
+/* .mint-swipe,
 .mint-swipe-items-wrap {
   width: 100%;
-  height: 180px;
+  height: 300px;
   .mint-swipe-item {
     width: 100%;
     height: 100%;
     background-color: #ccc;
-    text-align: center;
-    line-height: 180px;
-    font-size: 50px;
   }
 }
-
-.price{
-    s{
-        margin-right: 20px;
+ */
+.price {
+  s {
+    margin-right: 20px;
+  }
+  li:nth-of-type(2) {
+    position: relative;
+  }
+  .number {
+    position: absolute;
+    left: 100px;
+    top: 6px;
+    span {
+      display: inline-block;
+      text-align: center;
+      width: 40px;
+      line-height: 25px;
+      border: 1px solid #000;
     }
-    li:nth-of-type(2){
-        position: relative;
-        
-    }
-  .number{
-        position: absolute;
-        left: 100px;
-        top:6px;
-        span{
-            display: inline-block;
-            text-align: center;
-            width: 40px;
-            line-height: 25px;
-            border: 1px solid #000;
-        }
-    }
+  }
 }
-.mint-button--primary{
-    margin-bottom: 20px;
+.mint-button--primary {
+  margin-bottom: 20px;
 }
-.price,.Param,.other{
-    padding: 5px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    ul{
-        padding-left: 0;
-        li{
-            list-style: none;
-            padding: 8px;
-        }
+.price,
+.Param,
+.other {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  ul {
+    padding-left: 0;
+    li {
+      list-style: none;
+      padding: 8px;
     }
+  }
 }
-
 </style>
 
