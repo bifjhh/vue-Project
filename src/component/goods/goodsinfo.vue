@@ -99,6 +99,7 @@ export default {
         this.info = res.body.message[0];
       });
     },
+    // 用于获取子组件内传递的值
     getcount(count){
       this.inputNumberCount=count;
     },
