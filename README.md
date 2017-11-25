@@ -266,8 +266,8 @@ export default {
 - 因为组件之间并不是父子组件关系
 - 使用非父子组件的通信方法
 ### 非父子组件的通信
-
 - 有时候，非父子关系的两个组件之间也需要通信。在简单的场景下，可以使用一个空的 Vue 实例作为事件总线：
+#### 基本语法
 ```javascript
 var bus = new Vue()
 // 触发组件 A 中的事件
@@ -278,9 +278,31 @@ bus.$on('id-selected', function (id) {
   // ...
 })
 ```
+#### 思路 
+- 创建一个vm.js文件
+    + 用于导出 var bus = new Vue()
+    + 便于复用
+- 在需要触发事件（传出去值）的组件内创造
+```javascript
+bus.$emit('countstr',this.inputNumberCount);
+//可以直接创建，也可以通过事件方法的调用来进行创建
+//创建自定义事件名，并传入需要的值作为参数传递
+```
+- 在用来接收值组件内创建监听
+```javascript
+bus.$on('countstr', function(count) {
+    //传入，需要监听的自定义事件名，以及回调函数
+    // 回调函数内写用来处理接收到传递过来的值后进行的运算
+  var badegobj = document.querySelector("#badge");
+  badegobj.innerText = parseInt(badegobj.innerText) + count;
+})
+```
+
+
+
 ### 使用localStorage存储购物车数据
-#### 创建处理localStoraged的js文件
-- 设置常量key来作为localStoraged存取数据中的键
+##### 创建处理localStoraged的js文件
+- 设置一个常量（const）key来作为localStoraged存取数据中的 键
 - 设置一个obj对象 对象内用于存储商品的编号以及数量
 ```javascript
     var valueObj = {//导出一个obj对象 对象内用于存储商品的编号以及数量
@@ -289,7 +311,6 @@ bus.$on('id-selected', function (id) {
     };
 ```
 - 设置向localStorage存储数据的方法
-    + setItem
 
 ```javascript
     //setItem 设置localStorage存储数据
@@ -298,11 +319,11 @@ bus.$on('id-selected', function (id) {
 
         jsonString = jsonString||'[]';//如果没有已存储的数据，则赋值为空数组
 
-        var arr = JSON.parse(jsonString);//设置arr接收获得的数据，转换为对象
+        var arr = JSON.parse(jsonString);//设置arr，用来接收转换为对象的返回数据
 
         arr.push(value);//将用户点击加入购物车的内容，追加到arr数组内部
 
-        localStorage.setItem(key,JSON.stringify(arr));//将最佳好的内容，转换成json字符串格式存储到localStorage
+        localStorage.setItem(key,JSON.stringify(arr));//将追加好的内容，转换成json字符串格式存储到localStorage
     }
 ```
 
@@ -316,6 +337,8 @@ bus.$on('id-selected', function (id) {
     + 父组件使用ajax请求获取轮播图数据
     + swipe接收父组件传递的images数据，进行图片渲染，
 - 完成适应不同API的图片渲染
+
+
 
 
 ## 箭头函数
@@ -344,6 +367,8 @@ bus.$on('id-selected', function (id) {
         };
     };
 ```
+
+
 
 ## 域名提取
 - 在开发项目阶段，域名可能会分为测试域名，线上域名等多个域名，需要经常切换，所以讲域名进行提取       
