@@ -297,7 +297,15 @@ bus.$on('countstr', function(count) {
   badegobj.innerText = parseInt(badegobj.innerText) + count;
 })
 ```
-
+#### 添加购物车小球飞入动画
+- 点击添加到购物车时，数量处飞出一个小球，从隐藏状态飞出到购物车，然后隐藏后回归原始位置
+- 利用钩子动画完成动画小效果
+- 圆球初始值 设置v-if 隐藏
+```javascript
+<div v-if="isshow" class="ball">{{inputNumberCount}}</div>
+```
+- 当用户点击时，显示，并触发钩子动画
+- 动画效果到达购物车时圆球消失
 
 
 ### 使用localStorage存储购物车数据

@@ -13,6 +13,9 @@
             <ul>
                 <li>市场价：<s>￥{{info.market_price}}</s>销售价：<span>￥{{info.sell_price}}</span></li>
                 <li>购买数量：
+                  <transition name="show" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+                    <div v-if="isshow" class="ball">{{inputNumberCount}}</div>
+                  </transition>
                     <inputNumber @dataobj="getcount"></inputNumber>
                 </li>
                 <li>
@@ -44,13 +47,14 @@
 import { Toast } from "mint-ui";
 import common from "../../kits/common.js";
 import swipe from "../subcom/swipe.vue";
-import inputNumber from '../subcom/inputNumber.vue'
-import {bus} from '../../kits/vm.js'
-import {setItem, valueObj} from '../../kits/localSt.js';
+import inputNumber from "../subcom/inputNumber.vue";
+import { bus } from "../../kits/vm.js";
+import { setItem, valueObj } from "../../kits/localSt.js";
 
 export default {
   components: {
-    swipe,inputNumber
+    swipe,
+    inputNumber
   },
   data() {
     return {
@@ -58,7 +62,8 @@ export default {
       info: {},
       price: 1,
       imgs: [],
-      inputNumberCount:0,
+      inputNumberCount: 1,
+      isshow: false
     };
   },
   created() {
@@ -67,6 +72,18 @@ export default {
     this.getImgs();
   },
   methods: {
+    // 动画的钩子函数
+    beforeEnter(el) {
+      el.style.transform = "translate(145px,-20px)";
+    },
+    enter(el,done) {
+      el.offsetWidth;
+      el.style.transform = "translate(255px, 320px)";
+      done();
+    },
+    afterEnter(el) {
+      this.isshow = !this.isshow;
+    },
     //  获取轮播图数据
     getImgs() {
       var url = common.apidomain + "/api/getthumimages/" + this.id;
@@ -100,14 +117,15 @@ export default {
       });
     },
     // 用于获取子组件内传递的值
-    getcount(count){
-      this.inputNumberCount=count;
+    getcount(count) {
+      this.inputNumberCount = count;
     },
-    toshopcar(){
-      bus.$emit('countstr',this.inputNumberCount);
-      valueObj.goodsid=this.id;
-      valueObj.count=this.inputNumberCount;
+    toshopcar() {
+      bus.$emit("countstr", this.inputNumberCount);
+      valueObj.goodsid = this.id;
+      valueObj.count = this.inputNumberCount;
       setItem(valueObj);
+      this.isshow = !this.isshow;
     }
   }
 };
@@ -153,6 +171,18 @@ export default {
       padding: 8px;
     }
   }
+}
+.ball {
+  position: absolute;
+  width: 17px;
+  border-radius: 50%;
+  background-color: #f00;
+  color: #fff;
+  line-height: 17px;
+  text-align: center;
+  font-size: 14px;
+  transition: all 1s ease;
+  z-index:99 ;
 }
 </style>
 
