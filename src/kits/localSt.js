@@ -5,7 +5,7 @@
 *  移除数据 ： localStorage.removeItem(key);
 * */
 
-export const key = 'goodsdata';//设置常量key 为 goodsdata 
+export const key = 'goods';//设置常量key 为 goodsdata 
 export var valueObj = {//导出一个obj对象 对象内用于存储商品的编号以及数量
     "goodsid": 0,//商品编号id
     "count": 0,//商品数量
