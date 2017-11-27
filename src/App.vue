@@ -4,7 +4,7 @@
     <div>
         <!-- 使用mint-ui的header组件完成头部 -->
         <mt-header fixed title="vue项目"></mt-header>
-	<!-- 设置路由站位符 -->
+	      <!-- 设置路由站位符 -->
         <router-view></router-view>
 
 	<!-- 使用mui 完成底部选项卡 --> 
@@ -32,18 +32,31 @@
 
 <script>
 import { bus } from "./kits/vm.js";
+import {getgoodsObject } from './kits/localSt.js';
 // 本质上是一个vue组件
-bus.$on('countstr', function(count) {
+
+bus.$on("countstr", function(count) {
   var badegobj = document.querySelector("#badge");
   badegobj.innerText = parseInt(badegobj.innerText) + count;
-})
+});
 export default {
   //es6导出对象的写法
   // data: function() {
   data() {
-    //es6写法 等价于data: function() {}
-    return {}
+    return {
+      isshow: false
+    };
   },
+  beforeCreate() {
+    setTimeout(function() {
+      var haha = getgoodsObject();
+      var num = 0;
+      for (var key in haha) {
+        num += haha[key];
+      }
+      bus.$emit("countstr", num);
+    }, 500);
+  }
 };
 </script>
 <style scoped>
