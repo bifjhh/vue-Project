@@ -1,10 +1,6 @@
 <template>
   <div class="temp">
-        <mt-header fixed title="商品列表">
-            <router-link to="/" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-        </mt-header>
+        <mt-header fixed title="商品列表"></mt-header>
     <div class="mui-content" style="background-color:#fff">
 		    <ul class="mui-table-view mui-grid-view">
 		        <li v-for="v in list" :key="v.id"  class="mui-table-view-cell mui-media mui-col-xs-6">
