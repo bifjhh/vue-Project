@@ -1,10 +1,6 @@
 <template>
   <div class="temp">
-      <mt-header fixed title="发表评论">
-            <router-link v-bind="{to:'/goods/goodsinfo/'+id}" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-        </mt-header>
+      <mt-header fixed title="发表评论"></mt-header>
       <comment :id="id"></comment>
   </div>
 </template>
