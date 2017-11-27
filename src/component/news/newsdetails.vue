@@ -1,10 +1,6 @@
 <template lang="html">
     <div class="temp">
-        <mt-header fixed title="资讯详情">
-            <router-link to="/news/newslist" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-        </mt-header>
+        <mt-header fixed title="资讯详情"></mt-header>
         <div class="title">
             <h4 v-text="info.title"></h4>
             <p>{{info.add_time | datefmt('YYYY-MM-DD')}} <span>{{info.click}}</span>次浏览</p>
