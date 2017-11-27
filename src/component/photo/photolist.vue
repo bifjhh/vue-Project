@@ -1,11 +1,6 @@
 <template>
     <div class="temp">
-        <mt-header fixed title="图片分享">
-            <router-link to="/home" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-            <mt-button icon="more" slot="right"></mt-button>
-        </mt-header>
+        <mt-header fixed title="图片分享"></mt-header>
         <!-- 图片分类 -->
         <div class="classify">
             <ul v-bind="{style : 'width:' + ulWidth + 'px'}">
