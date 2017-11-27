@@ -1,10 +1,6 @@
 <template lang="html">
     <div class="temp">
-        <mt-header fixed title="图文资讯">
-            <router-link to="/home" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-        </mt-header>
+        <mt-header fixed title="图文资讯"></mt-header>
        <ul class="mui-table-view">
             <li class="mui-table-view-cell mui-media" v-for="v in list">
                 <router-link v-bind="{to:'/news/newsdetails/' + v.id}">
