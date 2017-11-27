@@ -1,11 +1,6 @@
 <template lang="html">
     <div class="temp">
-        <mt-header fixed title="会员">
-            <router-link to="/home" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-            <mt-button icon="more" slot="right"></mt-button>
-        </mt-header>
+        <mt-header fixed title="会员"></mt-header>
     </div>
 </template>
 
