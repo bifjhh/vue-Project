@@ -2,6 +2,7 @@
 <template>
         <!-- 页面结构 -->
     <div>
+        <div v-if="isshow" id="back"><a @click="backto()" href="javascript:void(0)">返回</a></div>
         <!-- 使用mint-ui的header组件完成头部 -->
         <mt-header fixed title="vue项目"></mt-header>
 	      <!-- 设置路由站位符 -->
@@ -32,7 +33,7 @@
 
 <script>
 import { bus } from "./kits/vm.js";
-import {getgoodsObject } from './kits/localSt.js';
+import { getgoodsObject } from "./kits/localSt.js";
 // 本质上是一个vue组件
 
 bus.$on("countstr", function(count) {
@@ -56,10 +57,35 @@ export default {
       }
       bus.$emit("countstr", num);
     }, 500);
+  },
+  methods: {
+    backto() {
+      this.$router.go(-1);
+    }
+  },
+  watch:{
+	  "$route":function (newroute,oldroute) {
+		  if(newroute.path.toLowerCase()=="/home"){
+			  this.isshow=false;
+		  }else{
+			  this.isshow=true;
+		  }
+	  }
   }
 };
 </script>
-<style scoped>
-/* scope的含义 代表此处的css文件只能够在当前vue文件中使用有效 */
+<style lang="less" scoped>
+#back {
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  padding: 5px 10px 5px;
+  a {
+    line-height: 30px;
+    font-size: 16px;
+    color: #fff;
+  }
+}
 </style>
+
 
