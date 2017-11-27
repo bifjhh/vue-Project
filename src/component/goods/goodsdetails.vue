@@ -1,10 +1,6 @@
 <template>
     <div class="temp">
-        <mt-header fixed :title="info.title">
-            <router-link v-bind="{to:'/goods/goodsinfo/'+id}" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-        </mt-header>
+        <mt-header fixed :title="info.title"></mt-header>
         <h4 v-text="info.title"></h4>
         <hr>
         <div class="content">
