@@ -1,11 +1,6 @@
 <template lang="html">
     <div class="temp">
-        <mt-header fixed title="购物车">
-            <router-link to="#" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
-            <mt-button icon="more" slot="right"></mt-button>
-        </mt-header>
+        <mt-header fixed title="购物车"></mt-header>
         <div class="row" v-for="(v,i) in datalist" :keys="v.id">
 			<mt-switch class="switch" v-model="value[i]"></mt-switch>
 			<img class="img" :src="v.thumb_path" alt="商品图片" >
