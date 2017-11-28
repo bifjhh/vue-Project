@@ -297,17 +297,6 @@ bus.$on('countstr', function(count) {
   badegobj.innerText = parseInt(badegobj.innerText) + count;
 })
 ```
-#### 添加购物车小球飞入动画
-- 点击添加到购物车时，数量处飞出一个小球，从隐藏状态飞出到购物车，然后隐藏后回归原始位置
-- 利用钩子动画完成动画小效果
-- 圆球初始值 设置v-if 隐藏
-```javascript
-<div v-if="isshow" class="ball">{{inputNumberCount}}</div>
-```
-- 当用户点击时，显示，并触发钩子动画
-- 动画效果到达购物车时圆球消失
-
-
 ### 使用localStorage存储购物车数据
 ##### 创建处理localStoraged的js文件
 - 设置一个常量（const）key来作为localStoraged存取数据中的 键
@@ -319,21 +308,92 @@ bus.$on('countstr', function(count) {
     };
 ```
 - 设置向localStorage存储数据的方法
-
 ```javascript
     //setItem 设置localStorage存储数据
     function setItem(value) {//value 为调用方法是传入的数据       
         var jsonString = localStorage.getItem(key);//设置变量接收本地已经存储的数据
-
         jsonString = jsonString||'[]';//如果没有已存储的数据，则赋值为空数组
-
         var arr = JSON.parse(jsonString);//设置arr，用来接收转换为对象的返回数据
-
         arr.push(value);//将用户点击加入购物车的内容，追加到arr数组内部
-
         localStorage.setItem(key,JSON.stringify(arr));//将追加好的内容，转换成json字符串格式存储到localStorage
     }
 ```
+#### 添加购物车小球飞入动画
+- 点击添加到购物车时，数量处飞出一个小球，从隐藏状态飞出到购物车，然后隐藏后回归原始位置
+- 利用钩子动画完成动画小效果
+- 圆球初始值 设置v-if 隐藏
+```javascript
+<div v-if="isshow" class="ball">{{inputNumberCount}}</div>
+```
+- 当用户点击时，显示，并触发钩子动画
+- 动画效果到达购物车时圆球消失
+
+#### 渲染购物车列表页面
+- 构造购物车组件,书写静态结构
+- 使用API接口,获取购物车数据
+- 首先获取本地存储的商品的ID值
+    + 在localsg.js内书写获取本地数据方法
+    + 将获得的数据转换为可供读取对象形式{ID:数量}
+- 将本地数据对象通过for in 循环，去除所有的商品id（键名），并以 ， 分隔
+    + 需要去除最后一个 ， 
+- 将获得的商品id拼接到get请求的url上，完成请求，获取数据，完成列表的加载
+
+#### 设置购物车数量加减方法
+- 在原有的inputNumber 组件上进行改动
+- 在localsg.js内书写添加减少的方法
+- 当点击 - 时，通过父子传值 调用方法 -1   
+- 当点击 + 时，通过父子传值 调用方法 +1   
+
+#### 设置删除功能
+- 在localsg.js内书写添加删除的方法
+- 在car页面书写删除函数
+    + 点击时传入商品ID,及索引值
+    + remove方法通过id删除本地数据内的id相同的数据
+    + 利用索引，删除购物车列表项以及value项
+#### 设置购物车徽章同步数量
+- 使用钩子函数beforeCreate
+- 获取转换后的本地数据
+- 遍历数据内的数量
+- 将数量通过传值的方式 vm.$emit("count", num); 发送到页面
+- 完成徽章内数量的同步
+
+#### 添加计算价格功能
+- 使用computed 计算属性，实时计算变动的内容
+- 使用函数来返回值
+    + 使用.filter()记录value的选中的状态,并return回来    
+    + 初始化一个记录金额的变量
+    + 使用forEach遍历value是否被选中
+    + 记录选中的商品的数量，以及金额 
+    + 计算总金额，并返回赋值给外面用来显示的变量
+    + 然后返回被选中的length值，用来显示被选中的件数
+```javascript
+  computed: {// 计算属性，实时计算
+    totalcount() {// 实时计算totalcount()函数的变动，并重新赋值计算
+      var trueArr = this.value.filter(function(item) {
+        return item;// 返回选项框的的选中状态
+      });
+      var amount = 0;//初始化金额的值
+      this.value.forEach((v, i) => {  // 循环value记录的值
+        if (v) {//判断当前索引是否被选中，选中则能够进入
+          var count = this.datalist[i].cou;//记录当前选中商品的数量
+          var price = this.datalist[i].sell_price;//记录当前选中商品的单个价格
+          var vamount = count * price;//计算当前商品的总价格
+          amount += vamount;//赋值给外面用来记录金额的变量
+        }
+      });
+      this.totalAmount = amount;//赋值
+      return trueArr.length;//返回被选中的件数
+    }
+  }
+```
+#### 设置页面返回上一层
+- 构造返回按钮处于页面左上角
+- 添加方法，使用router.go 作为 后退/前进导航
+- 因为首页不能够再进行返回上一级路由，所以要进行一个判断识别
+- 使用watch检测路由的变化
+    + 使用.path方法检测当前路径是否为'/home'
+    + 是则使返回标签不渲染
+    + 否则渲染返回上级标签
 
 
 
