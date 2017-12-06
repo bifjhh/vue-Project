@@ -1,4 +1,5 @@
-# webpack 项目结构中继承vue-router
+# vue商场项目
+## 在webpack 项目结构中配置
 - 安装vue-router
     + cnpm install vue-router --save
 - 在App.vue 中 配置 
