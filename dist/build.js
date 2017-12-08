@@ -35364,7 +35364,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n#back[data-v-6737ff2a] {\n  position: absolute;\n  z-index: 999;\n  top: 0px;\n  padding: 5px 10px 5px;\n}\n#back a[data-v-6737ff2a] {\n  line-height: 30px;\n  font-size: 16px;\n  color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n#back[data-v-6737ff2a] {\n  position: fixed;\n  z-index: 999;\n  top: 0px;\n  padding: 5px 10px 5px;\n}\n#back a[data-v-6737ff2a] {\n  line-height: 30px;\n  font-size: 16px;\n  color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -35515,7 +35515,7 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("mt-header", { attrs: { fixed: "", title: "vue项目" } }),
+      _c("mt-header", { attrs: { fixed: "", title: "商城首页" } }),
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
@@ -43413,7 +43413,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB3CAMAAAD/
   },
   methods: {
     getImg() {
-      var url = __WEBPACK_IMPORTED_MODULE_1__kits_common_js__["a" /* default */].apidomain+"/api/getlunbo";
+      var url = __WEBPACK_IMPORTED_MODULE_1__kits_common_js__["a" /* default */].apidomain+"/api/getthumimages/88";
       this.$http.get(url).then(function(res) {
         var data = res.body;
         if (data.status != 0) {
@@ -43860,7 +43860,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.mint-header[data-v-0430466a] {\r\n  background-color: #ccc;\r\n  color: #3d3d3d;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43870,6 +43870,8 @@ exports.push([module.i, "\n.mint-header[data-v-0430466a] {\r\n  background-color
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
 //
 //
 //
@@ -43893,7 +43895,11 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "temp" },
-    [_c("mt-header", { attrs: { fixed: "", title: "会员" } })],
+    [
+      _c("mt-header", { attrs: { fixed: "", title: "会员" } }),
+      _vm._v(" "),
+      _c("p", [_vm._v("暂无数据")])
+    ],
     1
   )
 }
@@ -43998,7 +44004,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.mint-header[data-v-159fb9eb] {\r\n  background-color: #ccc;\r\n  color: #3d3d3d;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -44008,6 +44014,7 @@ exports.push([module.i, "\n.mint-header[data-v-159fb9eb] {\r\n  background-color
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
 //
 //
 //
@@ -44031,7 +44038,11 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "temp" },
-    [_c("mt-header", { attrs: { fixed: "", title: "搜索" } })],
+    [
+      _c("mt-header", { attrs: { fixed: "", title: "搜索" } }),
+      _vm._v(" "),
+      _c("p", [_vm._v("暂无数据")])
+    ],
     1
   )
 }
