@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     getImg() {
-      var url = common.apidomain+"/api/getlunbo";
+      var url = common.apidomain+"/api/getthumimages/88";
       this.$http.get(url).then(function(res) {
         var data = res.body;
         if (data.status != 0) {
