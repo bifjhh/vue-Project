@@ -4,7 +4,7 @@
     <div>
         <div v-if="isshow" id="back"><a @click="backto()" href="javascript:void(0)">返回</a></div>
         <!-- 使用mint-ui的header组件完成头部 -->
-        <mt-header fixed title="vue项目"></mt-header>
+        <mt-header fixed title="商城首页"></mt-header>
 	      <!-- 设置路由站位符 -->
         <router-view></router-view>
 
@@ -76,7 +76,7 @@ export default {
 </script>
 <style lang="less" scoped>
 #back {
-  position: absolute;
+  position:fixed;
   z-index: 999;
   top: 0px;
   padding: 5px 10px 5px;
